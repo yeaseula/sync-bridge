@@ -1,4 +1,5 @@
-import { Link, Upload, RefreshCw, AlertCircle } from "lucide-react";
+import { Link, RefreshCw, AlertCircle } from "lucide-react";
+import { FilesInsert } from "./files-insert.ui";
 
 export const ConnectSection = () => {
   return (
@@ -12,13 +13,7 @@ export const ConnectSection = () => {
             </h3>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="group border-2 border-dashed border-gray-800 hover:border-primary-500/50 rounded-xl p-8 flex flex-col items-center justify-center bg-[#1c1c1c] transition-all cursor-pointer">
-                <Upload className="w-10 h-10 text-gray-600 group-hover:text-primary-500 mb-4 transition-colors" />
-                <p className="text-sm font-medium">Front-end Code (Local)</p>
-                <p className="text-xs text-gray-500 mt-2">
-                  Upload types.ts or drag & drop
-                </p>
-              </div>
+              <FilesInsert />
 
               <div className="space-y-4">
                 <div className="bg-[#1c1c1c] border border-gray-800 rounded-xl p-5">
