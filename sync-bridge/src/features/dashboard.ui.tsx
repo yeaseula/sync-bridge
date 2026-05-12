@@ -10,11 +10,11 @@ import {
 
 export const Dashboard = () => {
   return (
-    <div className="min-h-screen bg-[#0f0f0f] text-gray-200 font-sans">
+    <div className="min-h-screen text-gray-200 font-sans">
       {/* 1. Header */}
       <header className="border-b border-gray-800 px-6 py-4 flex items-center justify-between bg-[#161616]">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center font-bold text-white">
+          <div className="w-8 h-8 bg-primary-500 rounded-lg flex items-center justify-center font-bold text-white">
             AI
           </div>
           <h1 className="text-xl font-bold tracking-tight">API Sync Master</h1>
