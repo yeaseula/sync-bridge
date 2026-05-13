@@ -1,6 +1,5 @@
 import { Link, RefreshCw, AlertCircle } from "lucide-react";
 import { FilesInsert } from "./files-insert.ui";
-
 export const ConnectSection = () => {
   return (
     <main className="p-8 max-w-7xl mx-auto space-y-8">
