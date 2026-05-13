@@ -1,5 +1,7 @@
-import { Link, RefreshCw, AlertCircle } from "lucide-react";
-import { FilesInsert } from "../features/connect-source/files-insert.ui";
+import { Link, AlertCircle } from "lucide-react";
+import { FilesInsert } from "./files-insert.ui";
+
+import { ScanButton } from "../features/analyze-api/scan-button";
 
 export const ConnectSection = () => {
   return (
@@ -32,10 +34,7 @@ export const ConnectSection = () => {
               </div>
             </div>
 
-            <button className="w-full mt-12 bg-primary-600 hover:bg-primary-500 text-white font-bold py-3.5 rounded-xl flex items-center justify-center gap-2 transition-all active:scale-[0.98] shadow-lg shadow-blue-900/20">
-              <RefreshCw className="w-5 h-5" />
-              Scan & Compare
-            </button>
+            <ScanButton />
           </section>
         </div>
 
