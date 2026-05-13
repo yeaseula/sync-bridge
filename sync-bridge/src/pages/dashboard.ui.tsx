@@ -1,6 +1,6 @@
 import { Search, Bell, Settings } from "lucide-react";
 
-import { ConnectSection } from "./connect/connect-section.ui";
+import { ConnectSection } from "../widgets/connect-section.ui";
 
 export const Dashboard = () => {
   return (
