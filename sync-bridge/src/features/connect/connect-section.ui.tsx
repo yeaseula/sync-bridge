@@ -1,13 +1,55 @@
 import { Link, RefreshCw, AlertCircle } from "lucide-react";
 import { FilesInsert } from "./files-insert.ui";
+import { useApiStore } from "../gemini-ai-api/use-api-store.store";
+import { geminiAPIDiff } from "../gemini-ai-api/gemini-ai-api.utils";
 
 export const ConnectSection = () => {
+  const { fileContent, swaggerUrl, setIsAnalyzing, setAnalysisResult } =
+    useApiStore();
+
+  const handleScan = async () => {
+    // 1. 유효성 검사
+    if (!fileContent || !swaggerUrl) {
+      alert("파일을 업로드하고 Swagger URL을 입력해주세요.");
+      return;
+    }
+
+    setIsAnalyzing(true);
+
+    try {
+      // 2. swaggerData 정의 (외부 URL에서 데이터 가져오기)
+      const response = await fetch(swaggerUrl);
+
+      if (!response.ok) {
+        throw new Error("Swagger 데이터를 가져오는데 실패했습니다.");
+      }
+
+      // 여기서 정의되는 swaggerData가 AI에게 전달될 원본입니다.
+      const swaggerData = await response.json();
+
+      // 3. AI 분석 함수 호출 (정의한 swaggerData를 문자열로 전달)
+      const result = await geminiAPIDiff(
+        fileContent,
+        JSON.stringify(swaggerData),
+      );
+
+      if (result) {
+        setAnalysisResult(result); // Zustand 스토어에 결과 저장
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("분석 중 오류가 발생했습니다.");
+    } finally {
+      setIsAnalyzing(false);
+    }
+  };
+
   return (
     <main className="p-8 max-w-7xl mx-auto space-y-8">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* 2-1. Source Connection Card (Left 2 cols) */}
         <div className="lg:col-span-2 space-y-6">
-          <section className="bg-[#161616] border border-gray-800 rounded-2xl p-6 shadow-xl">
+          <section className="bg-[#161616] border border-gray-600 rounded-2xl p-6 shadow-xl h-full">
             <h3 className="text-lg font-semibold mb-6 flex items-center gap-2">
               <Link className="w-5 h-5 text-primary-500" /> Source Connection
             </h3>
@@ -16,14 +58,14 @@ export const ConnectSection = () => {
               <FilesInsert />
 
               <div className="space-y-4">
-                <div className="bg-[#1c1c1c] border border-gray-800 rounded-xl p-5">
+                <div className="bg-[#1c1c1c] border border-gray-600 rounded-xl p-5 h-full">
                   <p className="text-sm font-medium mb-3">
                     Back-end API (External)
                   </p>
                   <input
                     type="text"
                     placeholder="https://fastapi.com"
-                    className="w-full bg-[#0f0f0f] border border-gray-800 rounded-lg py-2.5 px-4 text-sm focus:outline-none focus:border-blue-500"
+                    className="w-full bg-[#0f0f0f] border border-gray-600 rounded-lg py-2.5 px-4 text-sm focus:outline-none focus:border-primary-500"
                   />
                   <p className="text-[11px] text-gray-500 mt-3 leading-relaxed">
                     * Enter Swagger/OpenAPI URL to fetch real-time spec.
@@ -32,7 +74,10 @@ export const ConnectSection = () => {
               </div>
             </div>
 
-            <button className="w-full mt-8 bg-primary-600 hover:bg-primary-500 text-white font-bold py-3.5 rounded-xl flex items-center justify-center gap-2 transition-all active:scale-[0.98] shadow-lg shadow-blue-900/20">
+            <button
+              onClick={handleScan}
+              className="w-full mt-12 bg-primary-600 hover:bg-primary-500 text-white font-bold py-3.5 rounded-xl flex items-center justify-center gap-2 transition-all active:scale-[0.98] shadow-lg shadow-blue-900/20"
+            >
               <RefreshCw className="w-5 h-5" />
               Scan & Compare
             </button>
@@ -41,7 +86,7 @@ export const ConnectSection = () => {
 
         {/* 2-2. Analysis Summary Card (Right 1 col) */}
         <div className="space-y-6">
-          <section className="bg-[#161616] border border-gray-800 rounded-2xl p-6 h-full shadow-xl">
+          <section className="bg-[#161616] border border-gray-600 rounded-2xl p-6 h-full shadow-xl">
             <h3 className="text-lg font-semibold mb-6 flex items-center gap-2">
               <AlertCircle className="w-5 h-5 text-yellow-500" /> Analysis
               Summary

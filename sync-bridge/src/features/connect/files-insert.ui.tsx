@@ -11,7 +11,7 @@ export const FilesInsert = () => {
       onDragLeave={onDragLeave}
       onDrop={onDrop}
       className={`group border-2 border-dashed rounded-xl p-8 flex flex-col items-center justify-center transition-all cursor-pointer bg-[#1c1c1c]
-              ${isDragging ? "border-primary-500 bg-primary-500/5" : "border-gray-800 hover:border-primary-500/50"}`}
+              ${isDragging ? "border-primary-500 bg-primary-500/5" : "border-gray-600 hover:border-primary-500/50"}`}
     >
       <input
         type="file"
