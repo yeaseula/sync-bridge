@@ -16,7 +16,7 @@ interface User {
 }
 `;
 
-export const DiffSection = () => {
+export const DiffViewer = () => {
   return (
     <div className="mt-8 border border-gray-800 rounded-2xl overflow-hidden bg-[#161616]">
       <div className="px-6 py-4 border-b border-gray-800 flex justify-between items-center bg-[#1c1c1c]">
