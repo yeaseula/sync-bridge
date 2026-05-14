@@ -1,5 +1,5 @@
-import { useApiStore } from "../gemini-ai-api/use-api-store.store";
-import { geminiAPIDiff } from "../gemini-ai-api/gemini-ai-api.utils";
+import { useApiStore } from "@/entity/analysis";
+import { geminiAPIDiff } from "@/shared/api";
 import { RefreshCw } from "lucide-react";
 
 export const ScanButton = () => {

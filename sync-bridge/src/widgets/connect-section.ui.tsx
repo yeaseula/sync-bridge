@@ -1,7 +1,7 @@
 import { Link, AlertCircle } from "lucide-react";
-import { FilesInsert } from "./files-insert.ui";
+import { FilesInsert } from "@/features/connect-source";
 
-import { ScanButton } from "../features/analyze-api/scan-button";
+import { ScanButton } from "@/features/analyze-api";
 
 export const ConnectSection = () => {
   return (

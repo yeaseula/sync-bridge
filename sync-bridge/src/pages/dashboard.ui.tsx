@@ -1,6 +1,7 @@
 import { Search, Bell, Settings } from "lucide-react";
 
-import { ConnectSection } from "../widgets";
+import { ConnectSection } from "@/widgets";
+import { DiffViewer } from "@/shared/ui";
 
 export const Dashboard = () => {
   return (
@@ -43,6 +44,7 @@ export const Dashboard = () => {
           <span>4. Apply</span>
         </div>
         <ConnectSection />
+        <DiffViewer />
       </main>
     </div>
   );
